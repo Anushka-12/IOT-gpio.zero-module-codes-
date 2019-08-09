@@ -1,0 +1,55 @@
+Camera connect in rasberry pi
+Steps 
+1.Enable camera 
+  pi@ rasberrypi:~ $ cd Desktop/\
+                :~/Desktop $ sudo raspi-config
+
+2. PI camera(Enable)
+  1.iNTERFACING OPTIONS
+  2.CLICK ON CAMERA
+OK
+
+3.nano cameraexmaple.py(create new file)
+4.sudo apt-getinstall python3-picamera
+5.namo cameraexample.py
+
+
+
+
+#Code
+import picamera
+import time
+camera=picamera.PiCamera()
+camera.vflip=True #flip image
+camera.capture('example.jpg')
+
+
+run:python cameraexample.py
+See: picture on rapberry pi desktop
+
+
+
+login to remote desktop of pi:
+
+
+
+#Code for recording live video
+import picamera
+import time
+camera=picamera.PiCamera()
+camera.vflip=True #flip image
+#camera.capture('example.jpg')
+camera.start_recording('examplevid.h264')
+time.sleep(5)
+camera.stop_recording
+
+run the code: you will have a recrding 
+
+
+
+
+
+
+
+
+

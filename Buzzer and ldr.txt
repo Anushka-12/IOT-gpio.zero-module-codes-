@@ -1,0 +1,43 @@
+#Pi Laser Trip wire
+
+In this resource you will use a laser pointer, a few electronic components, and a Raspberry Pi to make a laser tripwire. Each time a stealthy intruder breaks the laser beam, the Raspberry Pi will sound the alarm via a buzzer or a speaker.
+
+Hardware:
+1.rasberry pi
+2.breadboard
+3.capacitor
+3.LDR
+4.wires
+5.laser pointer
+6.drinking straw
+
+Code:
+from gpiozero import LightSensor
+ldr=LightSensor(17)
+ldr.when_dark=lambda: print("Intruder detected")
+
+Use of piezo buzzer when laser light is broken:
+Code for buzzer:
+from gpiozero import Buzzer
+buzzer=Buzzer(17)
+buzzer.on()
+buzzer.off()
+buzzer.beep()
+buzzer.beep(0.1,0.1,10)
+
+#Playing sound files with python
+1.pip3 install pygame
+import pygame
+pygame.init()
+my_sound=pygame.mixer.Sound('path')
+my_sound.play()
+
+
+#final Code:
+from gpiozero import LightSensor,Buzzer
+ldr=LightSensor(17)
+buzz=Buzzer(4)
+
+ldr.when_dark=lambda: buzz.beep(0.2,0.2,20)
+
+

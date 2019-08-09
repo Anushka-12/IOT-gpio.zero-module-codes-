@@ -1,0 +1,30 @@
+#Humidity  and Rainfall/temperature/pressure
+
+
+BME280(digital sensor)
+PI:
+17)3v3 Vin
+6(gnd) GND
+3(SDA) SDA(SDI)
+5(SCL) SCL(SCK)
+
+
+
+Code:
+import bme280
+import smbus2
+from time import sleep
+
+port = 1
+address = 0x77 # Adafruit BME280 address. Other BME280s may be different
+bus = smbus2.SMBus(port)
+
+bme280.load_calibration_params(bus,address)
+
+while True:
+    bme280_data = bme280.sample(bus,address)
+    humidity  = bme280_data.humidity
+    pressure  = bme280_data.pressure
+    ambient_temperature = bme280_data.temperature
+    print(humidity, pressure, ambient_temperature)
+    sleep(1)

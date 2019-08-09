@@ -1,0 +1,29 @@
+#How to use random module of sense hat
+Hardware:
+1.Raspberrypi
+2.Sense HAT or pI sense Hat emulator
+
+Software:
+1.Python3
+2.Sense HAT module of Python3
+
+>install sense-hat
+
+Attach sense hat to pi(Python as IDE)
+if dont have a sense hat then use sense hat emulator(trinket ad IDE)
+
+#Setting pixels at random:
+from sense_hat import SenseHat
+sense=Sensehat()
+
+sense.clear()
+sense.set_pixel(0,0,255,0,0)
+sense.set_pixel(0,7,0,255,0)
+
+#The set_pixel method takes data in the following order:
+x coordinate, y coordinate, red, green, blue
+
+
+#use random module:
+from random import randint
+

@@ -1,0 +1,80 @@
+Tweet using Rasberry pi:
+Hardware:
+1.Raspberrypi
+2.Camera module
+3.tactile buttons
+4.connect wires
+
+Software:
+1.Python3
+2.camera module
+3.tweety module
+
+Reboot your Raspberry Pi and then make sure that the camera is enabled:
+
+Click on the Menu, then on Preferences and choose Raspberry Pi Configuration. Then ensure that the radio button for Camera in the Interfaces tab has been checked.
+Finally, you’ll want to test that your camera is working. The easiest way to do this is to open a Terminal window and type the following:
+
+raspistill -k
+You should see a preview image displayed on the screen. You can exit the raspistill program by typing x and then pressing Enter.
+
+
+
+Code to capture image:
+from picamera import PiCamera
+camera = PiCamera()
+camera.capture('home/pi/selfie.png')
+camera.close()
+
+
+final code with timestamp:
+
+from picamera import PiCamera
+from datetime import datetime
+from time import sleep
+
+camera=PiCamera()
+now=datetime.now()
+filename="{0:%Y}--{0:%m}--{0:%d}--{0:%H}--{0:%M}--{0:%S}.png.format(now)"
+
+camera.start_preview(alpha=190)
+sleep(1)
+camera.capture('/home/pi{0}'.format(filename))
+camera.stop_preview()
+
+save file and run it:
+Connect the button
+Wire it up to the ground pin and GPIO 14 like so:
+
+Button programming:
+from gpiozero import Button
+button=Button(17)
+
+def hello():
+ print("Hello")
+
+btn.when_pressed=hello
+
+
+
+Final Code:
+from gpiozero import PiCamera()
+from datetime import datetime
+from time import sleep
+from gpiozero import Button
+
+button=Button(14)
+camera=PiCamera()
+now=datetime.now()
+
+filename=''
+
+def take_photo():
+ global filename
+ filename={}
+ camera.start_preview(alpha=190)
+ sleep(1)
+ camera.capture("path")
+ camera.stop_preview()
+
+button.when_pressed = take_photos

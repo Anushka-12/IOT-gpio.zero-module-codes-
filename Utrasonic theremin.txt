@@ -1,0 +1,32 @@
+#Use of ultrasonic sensor to control nodes played by sonic Pi
+
+
+install pyhton-osc
+Utrasonic sensor(echo=17,trigger=4)
+
+Code:
+
+
+open Sonic pi
+live_loop :listen do
+    use_real_time
+    note = sync "/osc/play_this"
+    play note[0]
+end
+
+
+
+#final connect to Sonic pi
+from gpiozero import DistanceSensor
+from time import sleep
+
+from pythonosc import osc_message_builder
+from pythonosc import udp_client
+
+sensor=Distancesensor(ech0=17,trigger=4)
+sender=udp_client.simpleUDPClient('127.00.1',459)
+
+while True:
+ pitch=round(sensor.distance*100+30)
+ sender.send_message('/play_this',pitch)
+ sleep(0.1)

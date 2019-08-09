@@ -1,0 +1,99 @@
+#Touch screen tweet app using pi camera
+Hardware
+
+Raspberry Pi Camera Module
+Raspberry Pi touchscreen display or standard monitor
+2 x tactile push buttons
+Breadboard
+4 x Male-female jumper leads
+2 x large buttons (optional, to replace tactile push buttons)
+
+
+#Softwares used
+install guizero
+install twython
+install -y rasberrypi-ui-mods
+install -y rasberrypi-net-mods
+
+
+#Connection
+23-one button
+25-one button
+any ground
+
+#Button programming
+from gpiozero import Button
+next_overlay_btn=Button(23)
+take_pic_btn=Button
+
+next_overlay_btn.when_pressed=next_overlay
+take_pic_btn.when_pressed=take_picture
+
+def next_overlay():
+ print("Next Overlay")
+
+def take_picture():
+ print("Take a picture")
+
+
+#Camera set up
+from picamera import PiCamera
+camera=PiCamera()
+camera.resolution=(800,480)
+camera.hflip=True
+camera.start_preview(alpha=128)
+
+
+#capturing and ;locating images from folder
+from time import gmtime,strftime
+output=strftime("/home/pi/allseeingpi/image-%d-%m %H:%M.png", gmtime())
+
+def take_picture():
+ camera.capture(output)
+ camera.stop_preview()
+
+
+
+
+#Overlays
+create a file named overlays and save it in same folkder where images are saved.
+
+
+- Set the `overlays_dir` to the directory where your overlays are stored. If you are following this tutorial exactly, you will **not** need to change this directory location.
+- Set the `overlays` to be a list of the filenames of the overlays (without extension), surrounded by quotes and separated by commas. For example, if you had overlay images called `rock.png`, `paper.png`, and `scissors.png`, your line of code would look like this:
+overlays = ['rock', 'paper', 'scissors']
+
+
+
+Now you can use:
+from overlay_functions import*
+def next_overlay():
+ global overlay
+ overlay=next(all_overlays)
+ preview_overlay(camera,overlay)
+
+
+
+# save an overlay on your picture
+def take_pictures():
+ camera.capture(output)
+ camera.stop_preview()
+ remove_overlays(camera)
+ output_overlay(output,overlay)
+
+
+
+#from guizero import App,PushButton,Text,Picture
+app=App("The All Seeing Pi",800x400)
+message=Text(app,"I spotted you!")
+new_pic=Pushbutton(app,text="New picture")
+app.display()
+
+def new_picture():
+ camera.start_preview(aipla=128)
+ previes-overlay(camera,overlay)
+
+
+
+
+

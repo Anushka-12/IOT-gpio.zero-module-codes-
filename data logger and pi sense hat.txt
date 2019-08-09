@@ -1,0 +1,94 @@
+#data logger using SenseHat:
+
+By creating a Sense HAT datalogger with your Raspberry Pi you will learn:
+
+How to collect data from multiple sensors and add it to a list structure
+To write and append data to a text file from within a Python program
+To capture and respond to input from the Sense HAT joystick
+About using threads to allow multiple parts of a program to run at once
+
+
+
+Hardware
+1.Rasberry Pi 
+2.Sense Hat
+
+Software
+1.Python3
+2.Sense HAT
+3.Minecraft pi
+
+>install sense-hat
+
+
+>Data from SenseHat
+1.Temperature sensor
+2.Humidity sensor
+3.Pressure sensor
+4.Orientation sensor
+5.Acceleration sensor
+6.Gyroscope
+7.Magnetic Field sensor
+
+
+
+#Code
+from sense_hat import SenseHat
+from date_time import datetime
+sense=SenseHat()
+
+def get_sense_data():
+ sense_data=[]
+ sense.get_temperature()
+ sense.get_pressure()
+ sense.get_humidity()
+ orientation=sense.get_orientation()
+ orientation["yaw"]
+ orientation["pitch"]
+ orientation["roll"]
+ mag=sense.get_compass_raw()
+ mag["x"]
+ mag["y"]
+ mag["z"]
+ acc=sense.get_accelerometer_raw()
+ acc["x"]
+ acc["y"]
+ acc["z"]
+ gyro=sense.get_gyroscope_raw()
+ gyro["x"]
+ gyro["y"]
+ gyro["z"]
+ datetime.now()
+ sense_data.append(sense.get_temperature())
+ sense_data.append(sense.get_pressure(())
+ sense_data.append(sense.get_humidity())
+ return sense_data
+
+
+while True:
+ print(get_sense_data())
+
+
+
+
+
+
+#creating a csv file
+import csv
+with open('some.csv','w',newline='') as f:
+ writer=csv.writer(f)
+ write.writerow(['Here','is','some','data'])
+
+
+
+
+
+#Final code to return data from sensor to csv file 
+
+from csv import writer
+with open('data.scv','w',newline='') as f:
+ data_writer=writer(f)
+
+ while True:
+ data=get_sense_data()
+ data_writer.writerow(data)

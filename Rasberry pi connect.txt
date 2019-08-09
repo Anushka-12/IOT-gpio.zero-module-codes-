@@ -1,0 +1,13 @@
+how to use raspberry window
+1. SSH client(putty)
+2. enter host name in putty
+3. black windoiw appears
+4.login as- pi
+5.password-_______
+6. write: sudo apt-get remove xrdp vnc4 server tightvncserver
+7.sudo apt-get install tightvncserver
+8.sudo apt-get install xrdp
+9.enter ip address , username ,passeord of pi
+
+
+

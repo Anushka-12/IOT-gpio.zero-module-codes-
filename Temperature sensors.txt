@@ -1,0 +1,103 @@
+#Temperature Sensor:
+Software:
+install python3-matplotlib
+
+The system on a chip (SoC) of the Raspberry Pi has a temperature sensor that can be used to measure its temperature from the command line. It can provide information on how much heat the chip has generated during operation, and can also report on the temperature of the environment. This project’s aim is to create a simple script that can run automatically as you boot up your Raspberry Pi, take measurements from the temperature sensor at given intervals, and write them into log files that can be viewed later.
+
+
+
+#Code(CPU temperature)
+from gpiozero import CPUTemperature
+cpu=CPUTemperature()
+RUN:
+
+
+
+#It would be useful if that data could be stored somewhere. A CSV (comma-separated values) file is ideal for this, as it can be used by applications like Excel and LibreOffice.
+
+You’ll want to log the date and time while getting the CPU temperatures, so you’ll need some extra libraries for this. Add this to your imports:
+
+
+Code:
+from time import sleep,strftime,time
+with open("home/pi/cpu_temp.csv","a")as log:
+ while True:
+  temp=cpu.temperature
+  log.write("{0},{1}\n".format(strftime("%Y-%m-%d" %H:%M:%S"),str(temp))))))
+  sleep(1)
+
+
+Explaination:
+log.write() will write whatever string is in the brackets to the CSV file.
+"{0},{1}\n" is a string containing two placeholders separated by a comma, and ending in a new line.
+strftime("%Y-%m-%d %H:%M:%S") is inserted into the first placeholder. It’s the current date and time as a string.
+str(temp) is the CPU temperature converted to a string, which is written into the second placeholder after the comma.
+
+
+#Graphical Representation of Time and temperature
+import matplotlib.pyplot as plt
+ply.ion()
+x=[]
+y=[]
+
+y.append(temp)
+x.append(time())
+plt.clf()
+plt.scatter(x,y)
+plt.plot(x,y)
+plt.draw()
+
+
+
+#Final code
+
+from gpiozero import CPUTemperature
+from time import sleep,strftime,time
+import matplotlib.pyplot as plt
+
+cpu=CPUTemperature()
+plt.ion()
+x=[]
+y=[]
+
+def write_temp(temp):
+ with open("/home/pi/cpu_temp.csv","a")as log:
+  log.write("{0},{1}\n".format(strftime("%Y-%m-%d %H:%M:%S"),str   (temp)))
+
+def graph(temp):
+ y.append(temp)
+ x.append(time())
+ plt.clf()
+ plt.scatter(x,y)
+ plt.draw()
+
+while True:
+ temp=cpu.temperature
+ write_temp(temp)
+ graph(temp)
+ sleep(1)
+
+
+
+
+#Automating scripts is simple with crontab. This is basically a file where commands can be placed that will run at certain times or after certain events. To begin, open up a terminal window (press Ctrl + Alt + T).
+
+To edit the crontab, you just type:
+
+crontab -e
+Scroll to the bottom of the file and add this single line:
+
+@reboot python3 /home/pi/temp_monitor.py
+This assumes that your script is called temp_monitor.py and that it’s saved in your home directory.
+
+Now reboot your Raspberry Pi. Give it a little time to run, then type the following in a terminal window:
+
+cat cpu_temp.csv
+This will enable you to see the contents of the CSV file.
+
+If you want to see a graph, then just uncomment the graph(temp) line using IDLE and run the file.
+
+
+
+
+

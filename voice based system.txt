@@ -1,0 +1,26 @@
+#AIY projects(commmand led by your voice)
+Hardware:
+1.Rasberrypi
+2.Google AIY voice Kit
+3.LED
+3.wires
+4.resistor
+>First, you need to use the plastic standoffs to help support the Voice Kit HAT when it is attached to the Raspberry Pi. Insert the standoffs into the mounting holes opposite the GPIO pins.
+
+>Next, attach the speaker to the kit. It has to be wired in a particular way: the red wire needs to be inserted into the hole closest to the Raspberry Pi’s Ethernet port. The black wire goes into the other hole. Use a Phillips-head screwdriver to secure the wires in place.
+
+>Now it’s time to connect the microphone to its leads. The connectors only fit one way, so this shouldn’t be too difficult.
+
+>Then the switch needs attaching. This can be awkward. The holes of the switch need to align with the pegs on the LED housing. Just make sure that the small switch (here in yellow) is positioned closest to the button.
+
+>To finish, attach the microphone and the button to the HAT as shown.
+
+>To finish, attach the microphone and the button to the HAT as shown.
+
+Software:
+sudo apt update && sudo apt install zx-utils -y
+unxz aiyprojects-2017-05-03.img.xz
+
+
+
+

@@ -1,0 +1,24 @@
+Motor connection using pi
+Harware:
+1.explorer HAT PRO
+2.1xgeared motor(12V 80RPM)
+3.wires
+4.1xwheel
+
+Software:
+sudo apt-get install pthon3-explorerhat
+
+Mount Explorer Hat on Rasberrypi
+Check if installed:
+pyhton3 -c "import explorerhat" 
+
+#Code(when button is pressed motor is made to run)
+import explorerhat
+from time import sleep
+
+def rum_motor(channel,event):
+ explorerhat.motor.one.forward(100)
+ sleep(10)
+ explorerhat.motor.one.stop()
+
+explorerhat.touch.one.pressed(run_motor)

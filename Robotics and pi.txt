@@ -1,0 +1,48 @@
+#Robot
+Hardware:
+1.Raspberry pi
+2.Motor controller board
+3.6N DC motor
+4.4xAA battery
+5.Time fligh5 finder ultrasonic distance sensor
+6.2xline following sensors
+7.18650 battery,USB charge discharge board
+8.L298N dual H Bridh=ge DC stepper Motor Driver Cpntroller board
+
+
+
+Atttach two motor to motor controller board and supply it with a power supply(
+GPIO pin	connects to	board pin
+7	<–>	In1
+8	<–>	In2
+9	<–>	In3
+10	<–>	In4
+GND	<–>	GND
+4AA)
+
+Code:
+from gpiozero import Robot
+robby=Robot(left=(7,8),right=(9,10))
+
+Run:
+robby.forward()
+robby.stop()
+Final Code:
+from gpiozero import Robot
+robot=Robot(left=7,8,right=(9,10))
+while True:
+ robot.forward()
+ sleep(3)
+ robot.stop()
+ robot.right()
+ sleep(1)
+ robot.stop()
+
+
+Basic commands for robot:
+robot.forward()
+robot.backward()
+robot.right()
+robot.left()
+robot.stop()
+
